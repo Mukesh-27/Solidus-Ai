@@ -15,9 +15,9 @@ export default function RightPanel() {
   ]
 
   return (
-    <div className="flex flex-col h-full">
-      {/* Toolbar */}
-      <div className="p-3 bg-white dark:bg-[#242938] border-b border-gray-200/70 dark:border-gray-800/70 flex items-center justify-between">
+    <div className="flex flex-col h-full bg-gradient-to-br from-transparent via-indigo-50/20 to-purple-50/20 dark:via-indigo-900/10 dark:to-purple-900/10">
+      {/* Toolbar with glassmorphism */}
+      <div className="p-3 bg-white/80 dark:bg-[#242938]/80 backdrop-blur-sm border-b border-gray-200/70 dark:border-gray-800/70 flex items-center justify-between">
         <div className="flex items-center">
           <div className="flex space-x-1.5 mr-3">
             <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -64,7 +64,7 @@ export default function RightPanel() {
         </TabButton>
       </div>
 
-      {/* Content Area */}
+      {/* Content Area with enhanced animations */}
       <div className="flex-1 overflow-hidden">
         <AnimatePresence mode="wait" initial={false}>
           {activeTab === 'code' ? (
@@ -150,7 +150,7 @@ export default function RightPanel() {
                     </div>
                   ) : (
                     <div className="text-green-600 dark:text-green-400">
-                      > Hello, World!
+                      <span className="font-mono">Hello, World!</span>
                     </div>
                   )}
                 </div>

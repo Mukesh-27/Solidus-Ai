@@ -16,10 +16,10 @@ export default function MainLayout({ children }) {
   }, [])
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50 dark:bg-[#121622] overflow-hidden">
-      {/* Header Bar */}
-      <header className={`z-20 bg-white dark:bg-[#1a1f2e] border-b border-gray-200/80 dark:border-gray-800/80 transition-shadow ${
-        isScrolled ? 'shadow-md' : ''
+    <div className="flex flex-col h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-indigo-50/20 dark:from-[#121622] dark:via-[#121622] dark:to-indigo-900/10 overflow-hidden">
+      {/* Header Bar with glassmorphism */}
+      <header className={`z-20 bg-white/80 dark:bg-[#1a1f2e]/80 backdrop-blur-sm border-b border-gray-200/80 dark:border-gray-800/80 transition-all ${
+        isScrolled ? 'shadow-lg' : ''
       }`}>
         <div className="px-4 h-14 flex items-center justify-between">
           {/* Logo & Mobile Menu Button */}
@@ -106,12 +106,15 @@ export default function MainLayout({ children }) {
 
       {/* Main Content Area */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar */}
+        {/* Sidebar with smooth transitions */}
         <motion.div 
           initial={false}
-          animate={{ width: isSidebarCollapsed ? '64px' : '280px' }}
+          animate={{ 
+            width: isSidebarCollapsed ? '64px' : '280px',
+            opacity: isSidebarCollapsed ? 0.9 : 1
+          }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="hidden md:block relative border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1f2e] h-full overflow-y-auto"
+          className="hidden md:block relative border-r border-gray-200/50 dark:border-gray-800/50 bg-white/90 dark:bg-[#1a1f2e]/90 backdrop-blur-sm h-full overflow-y-auto"
         >
           <button
             onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}

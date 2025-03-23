@@ -8,7 +8,7 @@ export default function LeftPanel({ isProcessing, setIsProcessing }) {
   return (
     <div className="flex flex-col h-full">
       {/* Section Tabs */}
-      <div className="flex items-center px-2 pt-2 border-b border-gray-200/70 dark:border-gray-800/70">
+      <div className="flex items-center px-2 pt-2 border-b border-gray-200/70 dark:border-gray-800/70 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20">
         <SidebarTab 
           active={activeSection === 'input'} 
           onClick={() => setActiveSection('input')}
@@ -34,14 +34,15 @@ export default function LeftPanel({ isProcessing, setIsProcessing }) {
       </div>
       
       {/* Panel Content */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto bg-gradient-to-b from-transparent to-gray-50 dark:to-gray-900/20">
         <AnimatePresence mode="wait">
           {activeSection === 'input' ? (
             <motion.div
               key="input"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
               className="p-4 space-y-4"
             >
               <div className="space-y-2">
@@ -53,7 +54,7 @@ export default function LeftPanel({ isProcessing, setIsProcessing }) {
                 </p>
               </div>
 
-              <div className="bg-white dark:bg-[#242938] rounded-xl shadow-sm border border-gray-200/70 dark:border-gray-800/70 overflow-hidden">
+              <div className="bg-white/80 dark:bg-[#242938]/80 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200/70 dark:border-gray-800/70 overflow-hidden">
                 <textarea
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
@@ -142,9 +143,10 @@ export default function LeftPanel({ isProcessing, setIsProcessing }) {
           ) : (
             <motion.div
               key="history"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
               className="p-4"
             >
               <div className="space-y-3">
