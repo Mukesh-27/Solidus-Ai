@@ -1,25 +1,22 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-
 export default function Layout({ children }) {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
   return (
-    <div className={`min-h-screen transition-colors duration-200 ${isDarkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
-      <nav className="border-b p-4">
-        <div className="flex justify-between items-center max-w-7xl mx-auto">
-          <h1 className="text-2xl font-bold text-primary">Solidus AI Demo</h1>
-          <button
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            className="p-2 rounded-lg bg-primary/10 hover:bg-primary/20"
-          >
-            {isDarkMode ? '🌞' : '🌙'}
-          </button>
+    <div className="min-h-screen bg-gray-50">
+      <nav className="bg-white border-b">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex justify-between items-center h-16">
+            <h1 className="text-xl font-bold text-gray-900">AI Code Generator</h1>
+            <div className="flex items-center space-x-4">
+              <button className="text-gray-500 hover:text-gray-700">
+                <span className="sr-only">Theme</span>
+                🌙
+              </button>
+            </div>
+          </div>
         </div>
       </nav>
-      <main className="max-w-7xl mx-auto p-4">
+      <main className="max-w-7xl mx-auto px-4 py-6">
         {children}
       </main>
     </div>
-  );
+  )
 }

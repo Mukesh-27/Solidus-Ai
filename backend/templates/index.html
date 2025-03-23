@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompts History</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-4xl mx-auto p-6">
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900">Prompts History</h1>
+            <p class="text-gray-600">All received prompts are listed below</p>
+        </header>
+
+        <div class="bg-white rounded-lg shadow">
+            <div class="px-4 py-5 border-b border-gray-200">
+                <h2 class="text-lg font-medium text-gray-900">Recent Prompts</h2>
+            </div>
+            
+            <div class="divide-y divide-gray-200">
+                {% if prompts %}
+                    {% for prompt in prompts|reverse %}
+                        <div class="p-4 hover:bg-gray-50">
+                            <div class="flex justify-between items-start">
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium text-gray-900">
+                                        Prompt #{{ prompt.id }}
+                                    </p>
+                                    <p class="mt-1 text-sm text-gray-600">
+                                        {{ prompt.prompt }}
+                                    </p>
+                                </div>
+                                <div class="ml-4">
+                                    <span class="text-xs text-gray-500">
+                                        {{ prompt.timestamp }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="p-4 text-center text-gray-500">
+                        No prompts received yet.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="mt-4 text-center text-sm text-gray-500">
+            <p>View this page at: <code class="bg-gray-100 px-2 py-1 rounded">http://localhost:5000</code></p>
+        </div>
+    </div>
+
+    <script>
+        // Auto-refresh the page every 10 seconds
+        setTimeout(() => {
+            window.location.reload();
+        }, 10000);
+    </script>
+</body>
+</html>
