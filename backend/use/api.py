@@ -4,7 +4,7 @@ import json
 # Request data
 data = {
     "endpointId": "predefined-openai-gpt4o",
-    "query": "What is ?",
+    "query": "What is AI ?",
     "pluginIds": [],
     "responseMode": "sync"
 }

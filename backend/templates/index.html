@@ -3,60 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prompts History</title>
+    <title>AI Code Generator - Prompt History</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+    </style>
+    <script>
+        // Auto-reload the page every 10 seconds
+        setTimeout(function() {
+            window.location.reload();
+        }, 10000);
+    </script>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-900 text-white min-h-screen">
     <div class="max-w-4xl mx-auto p-6">
         <header class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900">Prompts History</h1>
-            <p class="text-gray-600">All received prompts are listed below</p>
+            <h1 class="text-3xl font-bold text-blue-400">AI Code Generator</h1>
+            <p class="text-gray-400">Prompt History</p>
+            <p class="text-xs text-gray-500 mt-1">Auto-refreshing every 10 seconds...</p>
         </header>
 
-        <div class="bg-white rounded-lg shadow">
-            <div class="px-4 py-5 border-b border-gray-200">
-                <h2 class="text-lg font-medium text-gray-900">Recent Prompts</h2>
+        <div class="bg-gray-800/50 rounded-xl border border-blue-900/50 shadow-lg backdrop-blur-lg">
+            <div class="px-6 py-4 border-b border-blue-900/50">
+                <h2 class="text-lg font-medium text-blue-300">Recent Prompts</h2>
             </div>
             
-            <div class="divide-y divide-gray-200">
+            <div class="divide-y divide-blue-900/30">
                 {% if prompts %}
-                    {% for prompt in prompts|reverse %}
-                        <div class="p-4 hover:bg-gray-50">
-                            <div class="flex justify-between items-start">
+                    {% for prompt in prompts|reverse|unique(attribute='prompt') %}
+                        <div class="p-4 hover:bg-blue-900/20 transition-colors duration-200">
+                            <div class="flex justify-between items-start gap-4">
                                 <div class="flex-1">
-                                    <p class="text-sm font-medium text-gray-900">
-                                        Prompt #{{ prompt.id }}
-                                    </p>
-                                    <p class="mt-1 text-sm text-gray-600">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-xs font-medium px-2 py-1 rounded-full bg-blue-500/20 text-blue-300">
+                                            #{{ prompt.id }}
+                                        </span>
+                                        <span class="text-xs text-gray-400">
+                                            {{ prompt.timestamp }}
+                                        </span>
+                                        <span class="text-xs font-medium px-2 py-1 rounded-full bg-purple-500/20 text-purple-300">
+                                            {{ prompt.language|title }}
+                                        </span>
+                                        {% if prompt.status == 'pending' %}
+                                            <span class="text-xs font-medium px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-300">
+                                                Processing...
+                                            </span>
+                                        {% else %}
+                                            <span class="text-xs font-medium px-2 py-1 rounded-full bg-green-500/20 text-green-300">
+                                                ✓ Completed
+                                            </span>
+                                        {% endif %}
+                                    </div>
+                                    <p class="mt-2 text-sm text-gray-300 font-medium">
                                         {{ prompt.prompt }}
                                     </p>
-                                </div>
-                                <div class="ml-4">
-                                    <span class="text-xs text-gray-500">
-                                        {{ prompt.timestamp }}
-                                    </span>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
                 {% else %}
-                    <div class="p-4 text-center text-gray-500">
-                        No prompts received yet.
+                    <div class="p-8 text-center text-gray-400">
+                        <p class="text-sm">No prompts received yet.</p>
+                        <p class="text-xs mt-2">Generate some code to see the history here!</p>
                     </div>
                 {% endif %}
             </div>
         </div>
-
-        <div class="mt-4 text-center text-sm text-gray-500">
-            <p>View this page at: <code class="bg-gray-100 px-2 py-1 rounded">http://localhost:5000</code></p>
-        </div>
     </div>
-
-    <script>
-        // Auto-refresh the page every 10 seconds
-        setTimeout(() => {
-            window.location.reload();
-        }, 10000);
-    </script>
 </body>
 </html>
