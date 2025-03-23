@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Layout from './Components/Layout'
-import CodeEditor from './Components/CodeEditor'
 import WorkflowVisualizer from './Components/WorkflowVisualizer'
 import AIOutput from './Components/AiOutput'
 import StatusPanel from './Components/StatusPanel'
@@ -31,10 +30,7 @@ export default function App() {
     <Layout>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
-          <CodeEditor
-            value={code}
-            onChange={setCode}
-          />
+         
         </div>
         <div>
           <AIOutput messages={messages} />
